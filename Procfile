@@ -1,1 +1,1 @@
-web: gunicorn line_bot.wsgi --log-file -
+web gunicorn app:app
