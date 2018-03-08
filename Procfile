@@ -1,1 +1,1 @@
-web: python gogo.py
+web: gunicorn gogo.py
