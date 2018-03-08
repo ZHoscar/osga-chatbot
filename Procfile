@@ -1,1 +1,1 @@
-web: gunicorn —chdir osga gogo:app
+web: gunicorn gogo:app
