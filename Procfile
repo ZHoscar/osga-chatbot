@@ -1,1 +1,1 @@
-web: python gogo.py
+web: gunicorn line_bot.wsgi --log-file -
