@@ -46,7 +46,7 @@ def BBC_News():
     http = urllib3.PoolManager()
     response = http.request('GET', url)
 
-    soup = BeautifulSoup(request.data,"html.parser")
+    soup = BeautifulSoup(response.data,"html.parser")
     
 
 
