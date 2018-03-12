@@ -16,15 +16,6 @@ from linebot.models import (
 )
 
 
-### class definition ###
-"""
-    class for BBC_NEWS
-"""
-
-
-
-
-
 
 
 app = Flask(__name__)
@@ -91,6 +82,7 @@ def handle_message(event):
         line_bot_api.reply_message(
                                    event.reply_token,
                                    TextSendMessage(text=event.message.text))
+        return 0
 
 
     if event.message.text == "BBC":
@@ -98,6 +90,13 @@ def handle_message(event):
         line_bot_api.reply_message(
                                    event.reply_token,
                                    TextSendMessage(text=content))
+        return 0
+
+    if event.message.text == "you are ok":
+        line_bot_api.reply_message(
+                                   event.reply_token,
+                                   TextSendMessage(text="I'm good"))
+        return 0
 
 
 
