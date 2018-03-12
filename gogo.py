@@ -56,10 +56,10 @@ def BBC_News():
     response = http.request('GET', url)
 
     soup = BeautifulSoup(request.data,"html.parser")
+    
 
 
-
-    AllTitles = soup.find_al('a', class_="gs-c-promo-heading nw-o-link-split__anchor gs-o-faux-block-link__overlay-link gel-pica-bold", limit = 10)
+    AllTitles = soup.find_all('a', class_="gs-c-promo-heading nw-o-link-split__anchor gs-o-faux-block-link__overlay-link gel-pica-bold", limit = 10)
 
     AllParahs = [0] * len(AllTitles)
 
@@ -69,10 +69,10 @@ def BBC_News():
             AllParahs[num] = AllTitles[num].find_next("p")
             AllTitles[num] = AllTitles[num].text.strip()
             AllParahs[num] = AllParahs[num].text.strip()
-
+    Content = ""
 
     for num in range(len(AllTitles)):
-        Content = AllTitles[num] + "\n" + AllParahs[num] + "\n"
+        Content += AllTitles[num] + "\n" + AllParahs[num] + "\n"
 
     return Content
 
