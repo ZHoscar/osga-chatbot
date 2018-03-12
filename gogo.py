@@ -1,4 +1,6 @@
 
+import urllib3
+from bs4 import BeautifulSoup
 
 
 from flask import Flask, request, abort
@@ -12,6 +14,18 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
+
+
+### class definition ###
+"""
+    class for BBC_NEWS
+"""
+
+
+
+
+
+
 
 app = Flask(__name__)
 
@@ -34,11 +48,57 @@ def callback():
     return "OK"
 
 
+def BBC_News():
+
+    url = 'www.bbc.com/news'
+
+    http = urllib3.PoolManager()
+    response = http.request('GET', url)
+
+    soup = BeautifulSoup(request.data,"html.parser")
+
+
+
+    AllTitles = soup.find_al('a', class_="gs-c-promo-heading nw-o-link-split__anchor gs-o-faux-block-link__overlay-link gel-pica-bold", limit = 10)
+
+    AllParahs = [0] * len(AllTitles)
+
+    for num in range(len(AllTitles)):
+
+        if (AllTitles[num].find_next("p")!="0"):
+            AllParahs[num] = AllTitles[num].find_next("p")
+            AllTitles[num] = AllTitles[num].text.strip()
+            AllParahs[num] = AllParahs[num].text.strip()
+
+
+    for num in range(len(AllTitles)):
+        Content = AllTitles[num] + "\n" + AllParahs[num] + "\n"
+
+    return Content
+
+
+
+
+
+
+
+
+
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
+    if event.message.text == "echo":
+        line_bot_api.reply_message(
+                                   event.reply_token,
+                                   TextSendMessage(text=event.message.text))
+
+
+    if event.message.text == "BBC":
+        content = BBC_News()
+        line_bot_api.reply_message(
+                                   event.reply_token,
+                                   TextSendMessage(text=content))
+
 
 
 
@@ -46,3 +106,8 @@ def handle_message(event):
 
 if __name__ == "__main__":
     app.run()
+
+
+
+
+
