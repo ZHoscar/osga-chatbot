@@ -95,7 +95,7 @@ def handle_message(event):
                                    TextSendMessage(text=content))
         return 0
 
-    else if "/" in event.message.text:
+    if event.message.text == "are you ok":
         gs = goslate.Goslate()
         
         line_bot_api.reply_message(
