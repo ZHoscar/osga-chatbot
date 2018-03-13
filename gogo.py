@@ -22,8 +22,7 @@ app = Flask(__name__)
 
 line_bot_api = LineBotApi('I6zOR82ZAC1jQnRkhVnxFNFCi91+2JoAFhAM5LlrXngHWa3w6VTo1NS7hPzi7lN6gV94mVwrqfMUmtiQsVaFpB6T+yoRY9aAwG+L4JcP3ldYLO1SEIJMfDUJiApCmEpdyNn6ofW1XiADIxjRmX7ejAdB04t89/1O/w1cDnyilFU=')
 
-handler = WebhookHandler('306e5633e514f160f87e86453adb4b7d
-                         ')
+handler = WebhookHandler('306e5633e514f160f87e86453adb4b7d')
 
 
 @app.route("/callback", methods=['POST'])
@@ -65,7 +64,7 @@ def BBC_News():
     Content = ""
 
     for num in range(len(AllTitles)):
-        Content += "Head News: "AllTitles[num] + "\n""\t" + AllParahs[num] + "\n""\n"
+        Content += "Head News: " + AllTitles[num] + "\n""\t" + AllParahs[num] + "\n""\n"
 
     return Content
 
