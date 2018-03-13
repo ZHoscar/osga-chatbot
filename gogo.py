@@ -63,7 +63,7 @@ def BBC_News():
     Content = ""
 
     for num in range(len(AllTitles)):
-        Content += AllTitles[num] + "\n" + AllParahs[num] + "\n"
+        Content += "Head News: "AllTitles[num] + "\n""\t" + AllParahs[num] + "\n""\n"
 
     return Content
 
