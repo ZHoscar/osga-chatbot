@@ -102,6 +102,11 @@ def handle_message(event):
                                    event.reply_token,                                 TextSendMessage(text=gs.translate(event.message.text[2:], 'zh')))
         return 0
 
+    if event.message.text.find("\\") >= 0:
+        gs = goslate.Goslate()
+
+        line_bot_api.reply_message(
+                                   event.reply_token, TextSendMessage(text=gs.translate(event.message.text[2:], 'en')))
 
 
 
