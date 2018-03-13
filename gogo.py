@@ -95,7 +95,7 @@ def handle_message(event):
                                    TextSendMessage(text=content))
         return 0
 
-    if event.message.text == "are you ok":
+    if event.message.text.find("translate")>= 0:
         gs = goslate.Goslate()
         
         line_bot_api.reply_message(
