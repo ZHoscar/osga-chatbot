@@ -1,6 +1,8 @@
 
 import urllib3
+import goslate
 from bs4 import BeautifulSoup
+
 
 
 from flask import Flask, request, abort
@@ -64,7 +66,7 @@ def BBC_News():
     Content = ""
 
     for num in range(len(AllTitles)):
-        Content += "Head News: " + AllTitles[num] + "\n""\t" + AllParahs[num] + "\n""\n"
+        Content += "Head News:   " + AllTitles[num] + "\n""\t    " + AllParahs[num] + "\n""\n"
 
     return Content
 
@@ -93,11 +95,14 @@ def handle_message(event):
                                    TextSendMessage(text=content))
         return 0
 
-    if event.message.text == "you are ok":
+    if event.message.text == "good":
+        gs = goslate.Goslate()
+        
         line_bot_api.reply_message(
-                                   event.reply_token,
-                                   TextSendMessage(text="I'm good"))
+                                   event.reply_token,                                 TextSendMessage(text=gs.translate(event.message.text, 'zh')))
         return 0
+
+
 
 
 
