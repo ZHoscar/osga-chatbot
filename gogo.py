@@ -94,22 +94,22 @@ def handle_message(event):
         return 0
 
     if event.message.text == "image":
-        imagemap_message = ImagemapSendMessage(
-                           base_url='https://example.com/base',
-                           alt_text='this is an imagemap',
-                           base_size=BaseSize(height=1040, width=1040),
-                           actions=[
-                           URIImagemapAction(
-                                             link_uri='https://example.com/',
-                                             area=ImagemapArea(
-                                             x=0, y=0, width=520, height=1040)
-                                             ), MessageImagemapAction(
-                                                text='hello',
-                                                area=ImagemapArea(
-                                                x=520, y=0, width=520, height=1040
-                                                ))])
-        line_bot_api.reply_message(reply_token, imagemap_message)
-    
+        buttons_template = TemplateSendMessage(
+            alt_text = 'image template',
+            template = ButtonsTemplate(
+                title = 'Title 1 ',
+                text  = 'Text 1',
+                thumbnail_image_url='https://i.imgur.com/xQF5dZT.jpg'
+                actions = [MessageTemplateAction(
+                           label = 'first label', text = 'label1')
+                           MessageTemplateAction(
+                           label = 'second label', text = 'label2')
+                           ]
+                )
+        )
+        line_bot_api.reply_message(event.reply_token, buttons_template)
+        return 0
+
 
 
     if event.message.text.find("//")>= 0:
