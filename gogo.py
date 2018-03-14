@@ -1,6 +1,6 @@
 
 import urllib3
-import goslate
+from googletrans import Translator
 from bs4 import BeautifulSoup
 
 
@@ -96,17 +96,19 @@ def handle_message(event):
         return 0
 
     if event.message.text.find("//")>= 0:
-        gs = goslate.Goslate()
-        
+        translator = Translator()
+        trans = translator.translate(event.message.text, dest='zh-TW')
         line_bot_api.reply_message(
-                                   event.reply_token,                                 TextSendMessage(text=gs.translate(event.message.text[2:], 'zh')))
+                                   event.reply_token,                                 TextSendMessage(text=trans.text)
         return 0
 
     if event.message.text.find("\\") >= 0:
-        gs = goslate.Goslate()
+        translator = Translator()
+        trans = translator.translate(event.message.text[2:])
+        
 
         line_bot_api.reply_message(
-                                   event.reply_token, TextSendMessage(text=gs.translate(event.message.text[2:], 'en')))
+                                   event.reply_token, TextSendMessage(text=trans.text)
 
 
 
