@@ -22,9 +22,9 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('I6zOR82ZAC1jQnRkhVnxFNFCi91+2JoAFhAM5LlrXngHWa3w6VTo1NS7hPzi7lN6gV94mVwrqfMUmtiQsVaFpB6T+yoRY9aAwG+L4JcP3ldYLO1SEIJMfDUJiApCmEpdyNn6ofW1XiADIxjRmX7ejAdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi('Qn7SS4hSK8gTwFUwpqJzCX9s/BuowQh3cgJrQ44KWgtbwttZGawrvyPjz75iaiAdgV94mVwrqfMUmtiQsVaFpB6T+yoRY9aAwG+L4JcP3lfbVgzcRHM5K5C7jTsCRV+Zw9cNV1dBL2bZkFJlRzFBFwdB04t89/1O/w1cDnyilFU=')
 
-handler = WebhookHandler('306e5633e514f160f87e86453adb4b7d')
+handler = WebhookHandler('0b09c163f73558e065ccb5a6a24e057d')
 
 
 @app.route("/callback", methods=['POST'])
@@ -97,7 +97,7 @@ def handle_message(event):
 
     if event.message.text.find("//")>= 0:
         translator = Translator()
-        trans = translator.translate(event.message.text, dest='zh-TW')
+        trans = translator.translate(event.message.text[2:], dest='zh-TW')
         line_bot_api.reply_message(
                                    event.reply_token,                                 TextSendMessage(text=trans.text)
         return 0
