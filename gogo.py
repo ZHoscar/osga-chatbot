@@ -127,10 +127,11 @@ def handle_message(event):
 
         line_bot_api.reply_message(
                                    event.reply_token, TextSendMessage(text=trans.text))
+        return 0
 
-    elif text == 'carousel':
+    if event.message.text == "carousel":
         carousel_template = CarouselTemplate(columns=[
-        CarouselColumn(text='hoge1', title='fuga1', actions=[
+            CarouselColumn(text='hoge1', title='fuga1', actions=[
                        URITemplateAction(
                                          label='Go to line.me', uri='https://line.me'),
                                          PostbackTemplateAction(label='ping', data='ping')
@@ -145,9 +146,9 @@ def handle_message(event):
         template_message = TemplateSendMessage(
                          alt_text='Carousel alt text', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
+        return 0
 
-
-    elif text == 'image_carousel':
+    if event.message.text == "image_carousel":
         image_carousel_template = ImageCarouselTemplate(columns=[
         ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
                             action=DatetimePickerTemplateAction(label='datetime',
@@ -161,7 +162,7 @@ def handle_message(event):
         template_message = TemplateSendMessage(
                                                alt_text='ImageCarousel alt text', template=image_carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
-
+        return 0
 
 
 
