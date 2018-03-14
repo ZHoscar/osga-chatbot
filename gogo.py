@@ -99,7 +99,7 @@ def handle_message(event):
             template = ButtonsTemplate(
                 title = 'Title 1 ',
                 text  = 'Text 1',
-                thumbnail_image_url='https://i.imgur.com/xQF5dZT.jpg'
+                thumbnail_image_url='https://i.imgur.com/xQF5dZT.jpg',
                 actions=[
                            MessageTemplateAction(
                            label = 'first label', text = 'label1'),
