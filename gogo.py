@@ -196,7 +196,6 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,Carousel_template)
         return 0
 
-    elif event.message.text.find("我要買") == 0:
 
 
 
