@@ -100,8 +100,9 @@ def handle_message(event):
                 title = 'Title 1 ',
                 text  = 'Text 1',
                 thumbnail_image_url='https://i.imgur.com/xQF5dZT.jpg'
-                actions = [MessageTemplateAction(
-                           label = 'first label', text = 'label1')
+                actions=[
+                           MessageTemplateAction(
+                           label = 'first label', text = 'label1'),
                            MessageTemplateAction(
                            label = 'second label', text = 'label2')
                            ]
