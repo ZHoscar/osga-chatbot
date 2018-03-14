@@ -13,9 +13,7 @@ from linebot import (
 from linebot.exceptions import (
     InvalidSignatureError
 )
-from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
-)
+from linebot.models import *
 
 
 
@@ -94,6 +92,25 @@ def handle_message(event):
                                    event.reply_token,
                                    TextSendMessage(text=content))
         return 0
+
+    if event.message.text == "image":
+        imagemap_message = ImagemapSendMessage(
+                           base_url='https://example.com/base',
+                           alt_text='this is an imagemap',
+                           base_size=BaseSize(height=1040, width=1040),
+                           actions=[
+                           URIImagemapAction(
+                                             link_uri='https://example.com/',
+                                             area=ImagemapArea(
+                                             x=0, y=0, width=520, height=1040)
+                                             ), MessageImagemapAction(
+                                                text='hello',
+                                                area=ImagemapArea(
+                                                x=520, y=0, width=520, height=1040
+                                                ))])
+        line_bot_api.reply_message(reply_token, imagemap_message)
+    
+
 
     if event.message.text.find("//")>= 0:
         translator = Translator()
