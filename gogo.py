@@ -116,7 +116,7 @@ def handle_message(event):
         translator = Translator()
         trans = translator.translate(event.message.text[2:], dest='zh-TW')
         line_bot_api.reply_message(
-                                   event.reply_token,                                 TextSendMessage(text=trans.text))
+                                   event.reply_token,  TextSendMessage(text=trans.text))
         return 0
 
     if event.message.text.find("\\") >= 0:
@@ -131,43 +131,48 @@ def handle_message(event):
     if event.message.text == "carousel":
         Carousel_template =
         TemplateSendMessage(
-            alt_text='Carousel Template',
-            template=CarouselTemplate(
-                columns=[
-                    CarouselColumn(
-                    thumbnail_image_url='https://i.imgur.com/xQF5dZT.jpg',
-                    title = 'This is menu1',
-                    text='descriptions1',
-                    actions=[PostbackTemplateAction(
-                                            label='postback1',
-                                            text='postback text1',
-                                            data='action=buy&itemid=1'),
-                             MessageTemplateAction(
-                                            label='message1',
-                                            text='message text1'),
-                             URITemplateAction(
-                                            label='uri1',
-                                            uri='http://example.com/1')
-                             ]),
-                   CarouselColumn(
-                   thumbnail_image_url='https://i.imgur.com/xQF5dZT.jpg',
-                   title = 'this is menu2',
-                   text='description2',
-                   actions=[PostbackTemplateAction(
-                                              label='postback2',
-                                              text='postback text2',
-                                              data='action=buy&itemid=2'),
-                                              MessageTemplateAction(
-                                              label='message2',
-                                              text='message text2'),
-                                              URITemplateAction(
-                                              label='uri2',
-                                              uri='http://example.com/2')
-                            ]
-                        )
-                    ]
-                )
-                )
+                            
+                            alt_text='Carousel Template',
+                            template=CarouselTemplate(
+                                                      columns=[
+                                                               CarouselColumn(
+                                                                              thumbnail_image_url='https://i.imgur.com/xQF5dZT.jpg',
+                                                                              title = 'This is menu1',
+                                                                              text='descriptions1',
+                                                                              actions=[PostbackTemplateAction(
+                                                                                                              label='postback1',
+                                                                                                              text='postback text1'
+                                                                                                              ),
+                                                                                       MessageTemplateAction(
+                                                                                                             label='message1',
+                                                                                                             text='message text1'
+                                                                                                             ),
+                                                                                       URITemplateAction(
+                                                                                                         label='uri1',
+                                                                                                         text='trying'
+                                                                                                        )
+                                                                                      ]
+                                                                              ),
+                                                               CarouselColumn(
+                                                                              thumbnail_image_url='https://i.imgur.com/xQF5dZT.jpg',
+                                                                              title = 'this is menu2',
+                                                                              text='description2',
+                                                                              actions=[PostbackTemplateAction(
+                                                                                                              label='postback2',
+                                                                                                              text='postback text2'
+                                                                                                              ),
+                                                                                       MessageTemplateAction(
+                                                                                                             label='message2',
+                                                                                                             text='message text2'
+                                                                                                            ),
+                                                                                       URITemplateAction(
+                                                                                                         label='uri2'
+                                                                                                        )
+                                                                                       ]
+                                                                              )
+                                                               ]
+                                                      )
+                            )
         line_bot_api.reply_message(event.reply_token, Carousel_template)
 
 
