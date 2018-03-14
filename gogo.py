@@ -14,6 +14,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
+from linebot.models import ImageCarouselTemplate
 
 
 
@@ -153,11 +154,11 @@ def handle_message(event):
                             action=DatetimePickerTemplateAction(label='datetime',
                                                                 data='datetime_postback',
                                                                 mode='datetime')),
-                            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+        ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
                             action=DatetimePickerTemplateAction(label='date',
                                                                 data='date_postback',
                                                                 mode='date'))
-                                                             ])
+        ])
         template_message = TemplateSendMessage(
                                                alt_text='ImageCarousel alt text', template=image_carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
