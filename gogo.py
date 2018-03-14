@@ -76,6 +76,14 @@ def BBC_News():
 
 
 
+
+
+
+
+
+
+
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if event.message.text == "echo":
@@ -127,57 +135,69 @@ def handle_message(event):
         line_bot_api.reply_message(
                                    event.reply_token, TextSendMessage(text=trans.text))
         return 0
+    if event.message.text.find("--jp") >= 0:
+        translator = Translator()
+        trans = translator.translate(event.message.text[4:], dest='ja')
+
+
+        line_bot_api.reply_message(
+                                    event.reply_token, TextSendMessage(text=trans.text)
+        )
+        return 0
 
     elif event.message.text == "Carousel template":
         Carousel_template = TemplateSendMessage(
-                                            alt_text='Carousel template',
-                                            template=CarouselTemplate(
-                                                                      columns=[
-                                                                               CarouselColumn(
-                                                                                              thumbnail_image_url='https://a.ecimg.tw/items/DCABCTA90057H2O/000002_1478321440.jpg',
-                                                                                              title='this is menu1',
-                                                                                              text='description1',
-                                                                                              actions=[
-                                                                                                       PostbackTemplateAction(
-                                                                                                                              label='postback1',
-                                                                                                                              text='postback text1',
-                                                                                                                              data='action=buy&itemid=1'
-                                                                                                                              ),
-                                                                                                       MessageTemplateAction(
-                                                                                                                             label='message1',
-                                                                                                                             text='message text1'
-                                                                                                                             ),
-                                                                                                       URITemplateAction(
-                                                                                                                         label='uri1',
-                                                                                                                         uri='http://example.com/1'
-                                                                                                                         )
-                                                                                                       ]
-                                                                                              ),
-                                                                               CarouselColumn(
-                                                                                              thumbnail_image_url='https://a.ecimg.tw/items/DCABCTA90057H2O/000002_1478321440.jpg',
-                                                                                              title='this is menu2',
-                                                                                              text='description2',
-                                                                                              actions=[
-                                                                                                       PostbackTemplateAction(
-                                                                                                                              label='postback2',
-                                                                                                                              text='postback text2',
-                                                                                                                              data='action=buy&itemid=2'
-                                                                                                                              ),
-                                                                                                       MessageTemplateAction(
-                                                                                                                             label='message2',
-                                                                                                                             text='message text2'
-                                                                                                                             ),
-                                                                                                       URITemplateAction(
-                                                                                                                         label='連結2',
-                                                                                                                         uri='http://example.com/2'
-                                                                                                                         )
-                                                                                                       ]
-                                                                                              )
-                                                                               ]
-                                                                      )
-                                            )
+          alt_text='Carousel template',
+          template=CarouselTemplate(
+            columns=[
+              CarouselColumn(
+                thumbnail_image_url='https://a.ecimg.tw/items/DCABCTA90057H2O/000002_1478321440.jpg',
+                title='this is menu1',
+                text='description1',
+                actions=[
+                  PostbackTemplateAction(
+                    label='postback1',
+                    text='postback text1',
+                    data='action=buy&itemid=1'
+                                        ),
+                  MessageTemplateAction(
+                    label='message1',
+                    text='message text1'
+                                        ),
+                  URITemplateAction(
+                    label='uri1',
+                    uri='http://example.com/1'
+                                   )
+                        ]
+                           ),
+             CarouselColumn(
+               thumbnail_image_url='https://a.ecimg.tw/items/DCABCTA90057H2O/000002_1478321440.jpg',
+               title='this is menu2',
+               text='description2',
+               actions=[
+                 PostbackTemplateAction(
+                   label='postback2',
+                   text='postback text2',
+                   data='action=buy&itemid=2'
+                                       ),
+                MessageTemplateAction(
+                  label='message2',
+                  text='message text2'
+                                     ),
+               URITemplateAction(
+                  label='連結2',
+                  uri='http://example.com/2'
+                                )
+                      ]
+                         )
+                      ]
+              )
+        )
         line_bot_api.reply_message(event.reply_token,Carousel_template)
         return 0
+
+    elif event.message.text.find("我要買") == 0:
+
 
 
 
