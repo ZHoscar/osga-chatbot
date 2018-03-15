@@ -169,7 +169,8 @@ def handle_message(event):
         )
         return 0
 
-    elif event.message.text.find("我要買") == 0:
+    elif event.message.text.find("我要買") >= 0:
+        User_Product = Product_T()
         User_Product = Rakuten(event.meesage.text[3:])
 
 
@@ -180,10 +181,10 @@ def handle_message(event):
               CarouselColumn(
                 thumbnail_image_url=User_Product[0].product_image_url,
                 title=User_Product[0].product_name,
-                text=User_Product[0].product_price,
+                text='good',
                 actions=[
                   PostbackTemplateAction(
-                    label='postback1',
+                    label=User_Product[0].product_price,
                     text='postback text1',
                     data='action=buy&itemid=1'
                                         ),
