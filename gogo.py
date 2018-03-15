@@ -2,7 +2,7 @@
 import urllib3
 from googletrans import Translator
 from bs4 import BeautifulSoup
-
+import copy
 
 
 from flask import Flask, request, abort
@@ -68,10 +68,7 @@ def BBC_News():
     return Content
 
 
-
 class Product_T:
-    """ this class is for product category """
-    
     product_name = ""
     product_image_url = ""
     product_price = ""
@@ -81,7 +78,7 @@ class Product_T:
 
 def Rakuten(search_name):
     
-    Product = Product_T()
+    
     
     
     
@@ -94,17 +91,19 @@ def Rakuten(search_name):
     
     soup = BeautifulSoup(response.data, "html.parser")
     
-    temp_soup = soup.find_all('div', class_='b-mod-item-vertical products-grid-secion', limit = 10)
+    temp_soup = soup.find_all('div', class_='b-mod-item-vertical products-grid-section', limit = 10)
     
     ListOfProduct = []
     
     for n in range(len(temp_soup)):
+        Product = Product_T()
         temp_name = temp_soup[n].find_next('img')
         temp_price = temp_soup[n].find_next('span', class_="b-text-prime")
         Product.product_name = temp_name["alt"]
-        Product.product_image_url = temp_name["src"]
+        Product.product_image_url = temp_name["data-src"]
         Product.product_price = temp_price.text.strip()
-        ListOfProduct.append(Product)
+        ListOfProduct.append(copy.copy(Product))
+    
     
     return ListOfProduct
 
@@ -170,15 +169,18 @@ def handle_message(event):
         )
         return 0
 
-    elif event.message.text == "Carousel template":
+    elif event.message.text.find("我要買") == 0:
+        User_Product = Rakuten(event.meesage.text[3:])
+
+
         Carousel_template = TemplateSendMessage(
           alt_text='Carousel template',
           template=CarouselTemplate(
             columns=[
               CarouselColumn(
-                thumbnail_image_url='https://a.ecimg.tw/items/DCABCTA90057H2O/000002_1478321440.jpg',
-                title='this is menu1',
-                text='description1',
+                thumbnail_image_url=User_Product[0].product_image_url,
+                title=User_Product[0].product_name,
+                text=User_Product[0].product_price,
                 actions=[
                   PostbackTemplateAction(
                     label='postback1',
