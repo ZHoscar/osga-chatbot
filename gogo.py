@@ -172,9 +172,9 @@ def handle_message(event):
         line_bot_api.reply_message(
                                    event.reply_token, TextSendMessage(text=trans.text))
         return 0
-    if event.message.text.find("==jp") >= 0:
+    if event.message.text.find("") >= 0:
         translator = Translator()
-        trans = translator.translate(event.message.text[4:], dest=ja)
+        trans = translator.translate(event.message.text[4:], dest='ja-JP')
 
 
         line_bot_api.reply_message(
