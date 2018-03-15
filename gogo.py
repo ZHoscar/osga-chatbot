@@ -147,7 +147,7 @@ def handle_message(event):
 
     if event.message.text.find("//")>= 0:
         translator = Translator()
-        trans = translator.translate(event.message.text[4:], dest='zh-TW')
+        trans = translator.translate(event.message.text[2:], dest='zh-TW')
         line_bot_api.reply_message(
                                    event.reply_token,  TextSendMessage(text=trans.text))
         return 0
@@ -162,7 +162,7 @@ def handle_message(event):
         return 0
     if event.message.text.find("()jp") >= 0:
         translator = Translator()
-        trans = translator.translate(event.message.text[2:], dest='ja')
+        trans = translator.translate(event.message.text[4:], dest='ja')
 
 
         line_bot_api.reply_message(
