@@ -3,7 +3,7 @@ import urllib3
 from googletrans import Translator
 from bs4 import BeautifulSoup
 import copy
-import urllib.parse
+from urllib.parse import quote
 
 
 from flask import Flask, request, abort
@@ -81,9 +81,7 @@ def Rakuten(search_name):
     
     
     
-    
-    
-    search_name = urllib.parse.quote(search_name)
+    search_name = quote(search_name)
     url = 'https://www.rakuten.com.tw/search/' + search_name
     
     http = urllib3.PoolManager()
