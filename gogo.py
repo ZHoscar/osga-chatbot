@@ -69,8 +69,44 @@ def BBC_News():
 
 
 
+class Product_T:
+    """ this class is for product category """
+    
+    product_name = ""
+    product_image_url = ""
+    product_price = ""
 
 
+
+
+def Rakuten(search_name):
+    
+    Product = Product_T()
+    
+    
+    
+    search_name = search_name.replace(" ","%20")
+    url = 'https://www.rakuten.com.tw/search/' + search_name
+    
+    http = urllib3.PoolManager()
+    
+    response = http.request('GET', url)
+    
+    soup = BeautifulSoup(response.data, "html.parser")
+    
+    temp_soup = soup.find_all('div', class_='b-mod-item-vertical products-grid-secion', limit = 10)
+    
+    ListOfProduct = []
+    
+    for n in range(len(temp_soup)):
+        temp_name = temp_soup[n].find_next('img')
+        temp_price = temp_soup[n].find_next('span', class_="b-text-prime")
+        Product.product_name = temp_name["alt"]
+        Product.product_image_url = temp_name["src"]
+        Product.product_price = temp_price.text.strip()
+        ListOfProduct.append(Product)
+    
+    return ListOfProduct
 
 
 @handler.add(MessageEvent, message=TextMessage)
@@ -124,9 +160,9 @@ def handle_message(event):
         line_bot_api.reply_message(
                                    event.reply_token, TextSendMessage(text=trans.text))
         return 0
-    if event.message.text.find("\/") >= 0:
+    if event.message.text.find("()jp") >= 0:
         translator = Translator()
-        trans = translator.translate(event.message.text[4:], dest='ja')
+        trans = translator.translate(event.message.text[2:], dest='ja')
 
 
         line_bot_api.reply_message(
