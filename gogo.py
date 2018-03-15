@@ -171,7 +171,7 @@ def handle_message(event):
 
     elif event.message.text.find("我要買") >= 0:
         User_Product = Product_T()
-        User_Product = Rakuten(event.meesage.text[3:])
+        User_Product = Rakuten(event.message.text[3:])
 
 
         Carousel_template = TemplateSendMessage(
