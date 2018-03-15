@@ -68,22 +68,6 @@ def BBC_News():
     return Content
 
 
-class Product_T:
-    """ this class is for product category """
-
-    product_name = ""
-    product_image_url = ""
-    product_price = ""
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -142,7 +126,7 @@ def handle_message(event):
         return 0
     if event.message.text.find("\/") >= 0:
         translator = Translator()
-        trans = translator.translate(event.message.text[4:], dest='ja-JP')
+        trans = translator.translate(event.message.text[4:], dest='ja')
 
 
         line_bot_api.reply_message(
