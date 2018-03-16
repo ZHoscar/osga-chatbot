@@ -98,7 +98,7 @@ def Rakuten(search_name):
     
     soup = BeautifulSoup(response.data, "html.parser")
     
-    temp_soup = soup.find_all('div', class_='b-mod-item-vertical products-grid-section', limit = 3)
+    temp_soup = soup.find_all('div', class_='b-mod-item-vertical products-grid-section', limit = 5)
     
     ListOfProduct = []
     
@@ -192,7 +192,7 @@ def handle_message(event):
               CarouselColumn(
                 thumbnail_image_url=User_Product[0].product_image_url,
                 title=User_Product[0].product_name[:39],
-                text=User_Product[0].product_price,
+                text='商品價格： ' + User_Product[0].product_price,
                 actions=[
                   MessageTemplateAction(
                     label=event.message.text[3:],
@@ -211,25 +211,87 @@ def handle_message(event):
              CarouselColumn(
                thumbnail_image_url=User_Product[1].product_image_url,
                title=User_Product[1].product_name[:39],
-               text='description2',
+               text='商品價格： ' + User_Product[1].product_price,
                actions=[
-                 PostbackTemplateAction(
-                   label=User_Product[1].product_price,
-                   text='postback text2',
-                   data='action=buy&itemid=2'
+                 MessageTemplateAction(
+                   label=event.message.text[3:],
+                   text='我智障的點了一下'
                                        ),
-                MessageTemplateAction(
-                  label='message2',
-                  text='message text2'
+                URITemplateAction(
+                  label='google此商品',
+                  uri='https://www.google.com.tw'
                                      ),
                URITemplateAction(
-                  label='連結2',
-                  uri='http://example.com/2'
-                                )
-                      ]
-                         )
-                      ]
-              )
+                  label='比價此商品',
+                  uri='http://feebee.com.tw')])
+             
+           CarouselColumn(
+              thumbnail_image_url=User_Product[2].product_image_url,
+              title=User_Product[2].product_name[:39],
+              text='商品價格： ' + User_Product[2].product_price,
+              actions=[
+              MessageTemplateAction(
+                    label=event.message.text[3:],
+                    text='我智障的點了一下'
+                                    ),
+              URITemplateAction(
+                    label='google此商品',
+                    uri='https://www.google.com.tw'
+                                    ),
+              URITemplateAction(
+                    label='比價此商品',
+                    uri='http://feebee.com.tw')])
+            
+                     
+           CarouselColumn(
+             thumbnail_image_url=User_Product[3].product_image_url,
+             title=User_Product[3].product_name[:39],
+             text='商品價格： ' + User_Product[3].product_price,
+             actions=[
+               MessageTemplateAction(
+                    label=event.message.text[3:],
+                    text='我智障的點了一下'
+                                     ),
+               URITemplateAction(
+                    label='google此商品',
+                    uri='https://www.google.com.tw'
+                                ),
+               URITemplateAction(
+                    label='比價此商品',
+                    uri='http://feebee.com.tw')])
+                     
+              
+                     
+           CarouselColumn(
+             thumbnail_image_url=User_Product[4].product_image_url,
+             title=User_Product[4].product_name[:39],
+             text='商品價格： ' + User_Product[4].product_price,
+             actions=[
+             MessageTemplateAction(
+                label=event.message.text[3:],
+                text='我智障的點了一下'
+                                  ),
+             URITemplateAction(
+                label='google此商品',
+                uri='https://www.google.com.tw'
+                               ),
+             URITemplateAction(
+                label='比價此商品',
+                uri='http://feebee.com.tw')])
+                     
+                     
+                     
+                
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                 
+            ]
+         )
         )
         line_bot_api.reply_message(event.reply_token,Carousel_template)
         return 0
