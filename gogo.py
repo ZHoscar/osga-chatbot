@@ -4,7 +4,7 @@ from googletrans import Translator
 from bs4 import BeautifulSoup
 import copy
 from urllib.parse import quote
-
+import random
 
 from flask import Flask, request, abort
 
@@ -222,6 +222,15 @@ def handle_message(event):
         )
         line_bot_api.reply_message(event.reply_token,Carousel_template)
         return 0
+
+    if event.message.text == "are you ok":
+        a = random.randint(0,1)
+        if a == 0 :
+            line_bot_api.reply_meesage(event.reply_code, text = "i am ok")
+        elif a == 1 :
+            line_bot_api.reply_meesage(event.reply_code, text = "i am not ok")
+
+
 
 
 
