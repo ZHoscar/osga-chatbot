@@ -186,7 +186,7 @@ def handle_message(event):
 
 
         Carousel_template = TemplateSendMessage(
-          alt_text=event.message.text[3:]+'於樂天市場的資訊',
+          alt_text='於樂天市場的資訊',
           template=CarouselTemplate(
             columns=[
               CarouselColumn(
@@ -194,6 +194,9 @@ def handle_message(event):
                 title=User_Product[0].product_name,
                 text='Price: ' + User_Product[0].product_price,
                 actions=[
+                  MessageTemplateAction(
+                    label='驚喜折扣',
+                    text='我就是想按按看不知道為啥 我是智障？'),
                   URITemplateAction(
                     label='估狗此商品',
                     uri='https://www.google.com.tw'
@@ -201,14 +204,7 @@ def handle_message(event):
                   URITemplateAction(
                     label='比價此商品',
                     uri='http://feebee.com.tw'
-                                        ),
-                  MessageTemplateAction(
-                    label='驚喜折扣',
-                    text='我就是想按按看不知道為啥 我是智障？'
-                                   )
-                         
-                        ]
-                           ),
+                                        )]),
              CarouselColumn(
                thumbnail_image_url=User_Product[1].product_image_url,
                title=User_Product[1].product_name,
@@ -226,10 +222,8 @@ def handle_message(event):
                URITemplateAction(
                   label='連結2',
                   uri='http://example.com/2'
-                                )
-                      ]
-                         )
-                      ]
+                                )])
+              ]
               )
         )
         line_bot_api.reply_message(event.reply_token,Carousel_template)
