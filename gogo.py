@@ -97,7 +97,7 @@ def Rakuten(search_name):
     
     soup = BeautifulSoup(response.data, "html.parser")
     
-    temp_soup = soup.find_all('div', class_='b-mod-item-vertical products-grid-section', limit = 10)
+    temp_soup = soup.find_all('div', class_='b-mod-item-vertical products-grid-section', limit = 3)
     
     ListOfProduct = []
     
