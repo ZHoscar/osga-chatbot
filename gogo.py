@@ -186,32 +186,32 @@ def handle_message(event):
 
 
         Carousel_template = TemplateSendMessage(
-          alt_text='Carousel template',
+          alt_text=event.message.text[3:]+'於樂天市場的資訊',
           template=CarouselTemplate(
             columns=[
               CarouselColumn(
                 thumbnail_image_url=User_Product[0].product_image_url,
                 title=User_Product[0].product_name,
-                text='good',
+                text='Price: ' + User_Product[0].product_price,
                 actions=[
-                  PostbackTemplateAction(
-                    label=User_Product[0].product_price,
-                    text='postback text1',
-                    data='action=buy&itemid=1'
-                                        ),
-                  MessageTemplateAction(
-                    label='message1',
-                    text='message text1'
+                  URITemplateAction(
+                    label='估狗此商品',
+                    uri='https://www.google.com.tw'
                                         ),
                   URITemplateAction(
-                    label='uri1',
-                    uri='http://example.com/1'
+                    label='比價此商品',
+                    uri='http://feebee.com.tw'
+                                        ),
+                  MessageTemplateAction(
+                    label='驚喜折扣',
+                    text='我就是想按按看不知道為啥 我是智障？'
                                    )
+                         
                         ]
                            ),
              CarouselColumn(
-               thumbnail_image_url='https://a.ecimg.tw/items/DCABCTA90057H2O/000002_1478321440.jpg',
-               title='this is menu2',
+               thumbnail_image_url=User_Product[1].product_image_url,
+               title=User_Product[1].product_name,
                text='description2',
                actions=[
                  PostbackTemplateAction(
