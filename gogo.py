@@ -217,15 +217,15 @@ def handle_message(event):
                    label=event.message.text[3:],
                    text='我智障的點了一下'
                                        ),
-                URITemplateAction(
+                 URITemplateAction(
                   label='google此商品',
                   uri='https://www.google.com.tw'
                                      ),
-               URITemplateAction(
+                 URITemplateAction(
                   label='比價此商品',
-                  uri='http://feebee.com.tw')])
+                  uri='http://feebee.com.tw')]),
              
-           CarouselColumn(
+            CarouselColumn(
               thumbnail_image_url=User_Product[2].product_image_url,
               title=User_Product[2].product_name[:39],
               text='商品價格： ' + User_Product[2].product_price,
@@ -240,7 +240,7 @@ def handle_message(event):
                                     ),
               URITemplateAction(
                     label='比價此商品',
-                    uri='http://feebee.com.tw')])
+                    uri='http://feebee.com.tw')]),
             
                      
            CarouselColumn(
@@ -258,7 +258,7 @@ def handle_message(event):
                                 ),
                URITemplateAction(
                     label='比價此商品',
-                    uri='http://feebee.com.tw')])
+                    uri='http://feebee.com.tw')]),
                      
               
                      
@@ -278,20 +278,9 @@ def handle_message(event):
              URITemplateAction(
                 label='比價此商品',
                 uri='http://feebee.com.tw')])
-                     
-                     
-                     
-                
-                     
-                     
-                     
-                     
-                     
-                     
-                     
                  
-            ]
-         )
+              ]
+           )
         )
         line_bot_api.reply_message(event.reply_token,Carousel_template)
         return 0
