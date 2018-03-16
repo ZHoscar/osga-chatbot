@@ -18,15 +18,16 @@ from linebot.models import *
 
 
 
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+
+
 app = Flask(__name__)
 
 line_bot_api = LineBotApi('Qn7SS4hSK8gTwFUwpqJzCX9s/BuowQh3cgJrQ44KWgtbwttZGawrvyPjz75iaiAdgV94mVwrqfMUmtiQsVaFpB6T+yoRY9aAwG+L4JcP3lfbVgzcRHM5K5C7jTsCRV+Zw9cNV1dBL2bZkFJlRzFBFwdB04t89/1O/w1cDnyilFU=')
 
 handler = WebhookHandler('0b09c163f73558e065ccb5a6a24e057d')
 
-
-
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 
@@ -83,14 +84,13 @@ class Product_T:
 
 
 
-
 def Rakuten(search_name):
     
     
     Product = Product_T()
     
     search_name = quote(search_name)
-    url = 'https://www.rakuten.com.tw/search/' + search_name
+    url = 'https://www.rakuten.com.tw/search/' + search_name + '/?p=1&l-id=tw_pagen_1'
     
     http = urllib3.PoolManager()
     
@@ -113,6 +113,10 @@ def Rakuten(search_name):
     
     
     return ListOfProduct
+
+
+
+
 
 
 @handler.add(MessageEvent, message=TextMessage)
