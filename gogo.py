@@ -186,12 +186,12 @@ def handle_message(event):
 
 
         Carousel_template = TemplateSendMessage(
-          alt_text='搜尋之商品於樂天市場上的資訊',
+          alt_text='Carousel Template',
           template=CarouselTemplate(
             columns=[
               CarouselColumn(
                 thumbnail_image_url=User_Product[0].product_image_url,
-                title=User_Product[0].product_name,
+                title=User_Product[0].product_name[:39],
                 text='good',
                 actions=[
                   PostbackTemplateAction(
@@ -211,7 +211,7 @@ def handle_message(event):
                            ),
              CarouselColumn(
                thumbnail_image_url=User_Product[1].product_image_url,
-               title=User_Product[1].product_name,
+               title=User_Product[1].product_name[:39],
                text='description2',
                actions=[
                  PostbackTemplateAction(
