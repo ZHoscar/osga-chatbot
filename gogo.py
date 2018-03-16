@@ -25,6 +25,13 @@ line_bot_api = LineBotApi('Qn7SS4hSK8gTwFUwpqJzCX9s/BuowQh3cgJrQ44KWgtbwttZGawrv
 handler = WebhookHandler('0b09c163f73558e065ccb5a6a24e057d')
 
 
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+
+
+
+
 @app.route("/callback", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
