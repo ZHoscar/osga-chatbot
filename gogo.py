@@ -192,20 +192,19 @@ def handle_message(event):
               CarouselColumn(
                 thumbnail_image_url=User_Product[0].product_image_url,
                 title=User_Product[0].product_name[:39],
-                text='good',
+                text=User_Product[0].product_price,
                 actions=[
-                  PostbackTemplateAction(
-                    label=User_Product[0].product_price,
-                    text='postback text1',
-                    data='action=buy&itemid=1'
-                                        ),
                   MessageTemplateAction(
-                    label='message1',
-                    text='message text1'
+                    label=event.message.text[3:],
+                    text='我智障的點了一下'
                                         ),
                   URITemplateAction(
-                    label='uri1',
-                    uri='http://example.com/1'
+                    label='google此商品',
+                    uri='https://www.google.com.tw'
+                                        ),
+                  URITemplateAction(
+                    label='比價此商品',
+                    uri='http://feebee.com.tw'
                                    )
                         ]
                            ),
