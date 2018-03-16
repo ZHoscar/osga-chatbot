@@ -87,6 +87,7 @@ class Product_T:
 def Rakuten(search_name):
     
     
+    Product = Product_T()
     
     search_name = quote(search_name)
     url = 'https://www.rakuten.com.tw/search/' + search_name
@@ -102,7 +103,7 @@ def Rakuten(search_name):
     ListOfProduct = []
     
     for n in range(len(temp_soup)):
-        Product = Product_T()
+        
         temp_name = temp_soup[n].find_next('img')
         temp_price = temp_soup[n].find_next('span', class_="b-text-prime")
         Product.product_name = temp_name["alt"]
