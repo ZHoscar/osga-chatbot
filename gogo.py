@@ -186,7 +186,7 @@ def handle_message(event):
 
 
         Carousel_template = TemplateSendMessage(
-          alt_text='Carousel template',
+          alt_text='搜尋之商品於樂天市場上的資訊',
           template=CarouselTemplate(
             columns=[
               CarouselColumn(
@@ -210,12 +210,12 @@ def handle_message(event):
                         ]
                            ),
              CarouselColumn(
-               thumbnail_image_url='https://a.ecimg.tw/items/DCABCTA90057H2O/000002_1478321440.jpg',
-               title='this is menu2',
+               thumbnail_image_url=User_Product[1].product_image_url,
+               title=User_Product[1].product_name,
                text='description2',
                actions=[
                  PostbackTemplateAction(
-                   label='postback2',
+                   label=User_Product[1].product_price,
                    text='postback text2',
                    data='action=buy&itemid=2'
                                        ),
