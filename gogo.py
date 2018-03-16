@@ -226,7 +226,7 @@ def handle_message(event):
     if event.message.text == "are you ok":
         a = random.randint(0,1)
         if a == 0 :
-            line_bot_api.reply_meesage(event.reply_code, text = "i am ok")
+            line_bot_api.reply_meesage(event.reply_code, TextSendMessage(text = "i am ok"))
         elif a == 1 :
             line_bot_api.reply_meesage(event.reply_code, TextSendMessage(text = "i am not ok"))
 
