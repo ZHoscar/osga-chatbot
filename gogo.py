@@ -90,7 +90,7 @@ def Rakuten(search_name):
     Product = Product_T()
     
     search_name = quote(search_name)
-    url = 'https://www.rakuten.com.tw/search/' + search_name + '/?p=1&l-id=tw_pagen_1'
+    url = 'https://www.rakuten.com.tw/search/' + search_name
     
     http = urllib3.PoolManager()
     
@@ -186,28 +186,32 @@ def handle_message(event):
 
 
         Carousel_template = TemplateSendMessage(
-          alt_text='於樂天市場的資訊',
+          alt_text='Carousel template',
           template=CarouselTemplate(
             columns=[
               CarouselColumn(
                 thumbnail_image_url=User_Product[0].product_image_url,
                 title=User_Product[0].product_name,
-                text='Price: ' + User_Product[0].product_price,
+                text='good',
                 actions=[
+                  PostbackTemplateAction(
+                    label=User_Product[0].product_price,
+                    text='postback text1',
+                    data='action=buy&itemid=1'
+                                        ),
                   MessageTemplateAction(
-                    label='驚喜折扣',
-                    text='我就是想按按看不知道為啥 我是智障？'),
-                  URITemplateAction(
-                    label='估狗此商品',
-                    uri='https://www.google.com.tw'
+                    label='message1',
+                    text='message text1'
                                         ),
                   URITemplateAction(
-                    label='比價此商品',
-                    uri='http://feebee.com.tw'
-                                        )]),
+                    label='uri1',
+                    uri='http://example.com/1'
+                                   )
+                        ]
+                           ),
              CarouselColumn(
-               thumbnail_image_url=User_Product[1].product_image_url,
-               title=User_Product[1].product_name,
+               thumbnail_image_url='https://a.ecimg.tw/items/DCABCTA90057H2O/000002_1478321440.jpg',
+               title='this is menu2',
                text='description2',
                actions=[
                  PostbackTemplateAction(
@@ -222,8 +226,10 @@ def handle_message(event):
                URITemplateAction(
                   label='連結2',
                   uri='http://example.com/2'
-                                )])
-              ]
+                                )
+                      ]
+                         )
+                      ]
               )
         )
         line_bot_api.reply_message(event.reply_token,Carousel_template)
