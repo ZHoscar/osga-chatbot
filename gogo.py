@@ -111,7 +111,7 @@ def Rakuten(search_name):
         temp_url = temp_soup[n].find_next('a')
         temp_seller = temp_soup[n].find_next('a', class_="product-shop")
         Product.product_seller = temp_seller.text.strip()
-        Product.product_url = temp_url["href"]
+        Product.product_url = 'https://www.rakuten.com.tw'+temp_url['href']
         Product.product_name = temp_name["alt"]
         Product.product_image_url = temp_name["data-src"]
         Product.product_price = temp_price.text.strip()
