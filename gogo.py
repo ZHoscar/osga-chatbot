@@ -81,6 +81,8 @@ class Product_T:
     product_name = ""
     product_image_url = ""
     product_price = ""
+    product_url=""
+    product_seller=""
 
 
 
@@ -106,6 +108,10 @@ def Rakuten(search_name):
         
         temp_name = temp_soup[n].find_next('img')
         temp_price = temp_soup[n].find_next('span', class_="b-text-prime")
+        temp_url = temp_soup[n].find_next('a')
+        temp_seller = temp_soup[n].find_next('a', class_="product-shop")
+        Product.product_seller = temp_seller.text.strip()
+        Product.product_name = temp_url['href']
         Product.product_name = temp_name["alt"]
         Product.product_image_url = temp_name["data-src"]
         Product.product_price = temp_price.text.strip()
@@ -193,10 +199,12 @@ def handle_message(event):
                 thumbnail_image_url=User_Product[0].product_image_url,
                 title=User_Product[0].product_name[:39],
                 text='商品價格： ' + User_Product[0].product_price,
+                text='賣家： '+ User_Product[0].product_seller,
+                             
                 actions=[
-                  MessageTemplateAction(
+                  URITemplateAction(
                     label=event.message.text[3:],
-                    text='我智障的點了一下'
+                    uri = User_Product.product_url
                                         ),
                   URITemplateAction(
                     label='google此商品',
