@@ -110,11 +110,14 @@ def Rakuten(search_name):
         temp_price = temp_soup[n].find_next('span', class_="b-text-prime")
         temp_url = temp_soup[n].find_next('a')
         temp_seller = temp_soup[n].find_next('a', class_="product-shop")
+        
         Product.product_seller = temp_seller.text.strip()
-        Product.product_url = 'https://www.rakuten.com.tw'+temp_url['href']
+        
         Product.product_name = temp_name["alt"]
+        Product.product_url = 'https://www.rakuten.com.tw'+ temp_url['href']
         Product.product_image_url = temp_name["data-src"]
         Product.product_price = temp_price.text.strip()
+        
         ListOfProduct.append(copy.copy(Product))
     
     
@@ -203,7 +206,7 @@ def handle_message(event):
                 actions=[
                   URITemplateAction(
                     label='商品：' + event.message.text[3:],
-                    uri = User_Product.product_url
+                    uri = User_Product[0].product_url
                                         ),
                   URITemplateAction(
                     label='商品賣家： ' + User_Product.product_seller[:9],
