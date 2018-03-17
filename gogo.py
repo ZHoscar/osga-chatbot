@@ -92,7 +92,7 @@ def Rakuten(search_name):
     Product = Product_T()
     
     search_name = quote(search_name)
-    url = 'https://www.rakuten.com.tw/search/' + search_name
+    url = 'https://www.rakuten.com.tw/search/' + search_name +'/?p=1&l-id=tw_pagen_1'
     
     http = urllib3.PoolManager()
     
