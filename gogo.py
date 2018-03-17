@@ -83,7 +83,7 @@ class Product_T:
     product_price = ""
     product_url=""
     product_seller=""
-
+    product_seller_url=""
 
 
 def Rakuten(search_name):
@@ -112,6 +112,7 @@ def Rakuten(search_name):
         temp_seller = temp_soup[n].find_next('a', class_="product-shop")
         
         Product.product_seller = temp_seller.text.strip()
+        Product.product_seller_url = temp_seller['href']
         
         Product.product_name = temp_name["alt"]
         Product.product_url = 'https://www.rakuten.com.tw'+ temp_url['href']
@@ -210,7 +211,7 @@ def handle_message(event):
                                         ),
                   URITemplateAction(
                     label='商品賣家： ' + User_Product[0].product_seller[:9],
-                    uri='https://www.google.com.tw'
+                    uri=User_Product[0].product_seller_url
                                         ),
                   URITemplateAction(
                     label='比價此商品',
@@ -223,13 +224,13 @@ def handle_message(event):
                title=User_Product[1].product_name[:39],
                text='商品價格： ' + User_Product[1].product_price,
                actions=[
-                 MessageTemplateAction(
-                   label=event.message.text[3:],
-                   text='我智障的點了一下'
+                 URITemplateAction(
+                   label='商品： '+ event.message.text[3:],
+                   uri = User_Product[1].product_url
                                        ),
                  URITemplateAction(
-                  label='google此商品',
-                  uri='https://www.google.com.tw'
+                  label='商品賣家： ' + User_Product[1].product_seller[:9],
+                  uri=User_Product[1].product_seller_url
                                      ),
                  URITemplateAction(
                   label='比價此商品',
@@ -240,13 +241,13 @@ def handle_message(event):
               title=User_Product[2].product_name[:39],
               text='商品價格： ' + User_Product[2].product_price,
               actions=[
-              MessageTemplateAction(
-                    label=event.message.text[3:],
-                    text='我智障的點了一下'
+              URITemplateAction(
+                    label='商品： ' + event.message.text[3:],
+                    uri = User_Product[2].product_url
                                     ),
               URITemplateAction(
-                    label='google此商品',
-                    uri='https://www.google.com.tw'
+                    label='商品賣家： ' + User_Product[2].product_seller[:9],
+                    uri=User_Product[2].product_seller_url
                                     ),
               URITemplateAction(
                     label='比價此商品',
@@ -258,13 +259,13 @@ def handle_message(event):
              title=User_Product[3].product_name[:39],
              text='商品價格： ' + User_Product[3].product_price,
              actions=[
-               MessageTemplateAction(
-                    label=event.message.text[3:],
-                    text='我智障的點了一下'
+               URITemplateAction(
+                    label='商品： ' + event.message.text[3:],
+                    uri = User_Product[3].product_url
                                      ),
                URITemplateAction(
-                    label='google此商品',
-                    uri='https://www.google.com.tw'
+                    label='商品賣家： ' + User_Product[3].product_seller[:9],
+                    uri=User_Product[3].product_seller_url
                                 ),
                URITemplateAction(
                     label='比價此商品',
@@ -277,13 +278,13 @@ def handle_message(event):
              title=User_Product[4].product_name[:39],
              text='商品價格： ' + User_Product[4].product_price,
              actions=[
-             MessageTemplateAction(
-                label=event.message.text[3:],
-                text='我智障的點了一下'
+             URITemplateAction(
+                label='商品： ' + event.message.text[3:],
+                uri = User_Product[4].product_url
                                   ),
              URITemplateAction(
-                label='google此商品',
-                uri='https://www.google.com.tw'
+                label='商品賣家： ' + User_Product[4].product_seller[:9],
+                uri=User_Product[4].product_seller_url
                                ),
              URITemplateAction(
                 label='比價此商品',
