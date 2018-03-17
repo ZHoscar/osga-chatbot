@@ -199,7 +199,6 @@ def handle_message(event):
                 thumbnail_image_url=User_Product[0].product_image_url,
                 title=User_Product[0].product_name[:39],
                 text='商品價格： ' + User_Product[0].product_price,
-                text='賣家： '+ User_Product[0].product_seller,
                              
                 actions=[
                   URITemplateAction(
