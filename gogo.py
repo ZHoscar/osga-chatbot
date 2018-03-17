@@ -209,7 +209,7 @@ def handle_message(event):
                     uri = User_Product[0].product_url
                                         ),
                   URITemplateAction(
-                    label='商品賣家： ' + User_Product.product_seller[:9],
+                    label='商品賣家： ' + User_Product[0].product_seller[:9],
                     uri='https://www.google.com.tw'
                                         ),
                   URITemplateAction(
