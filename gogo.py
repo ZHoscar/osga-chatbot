@@ -181,7 +181,7 @@ def handle_message(event):
                                    event.reply_token, TextSendMessage(text=trans.text))
         return 0
     if event.message.text == "**晚安":
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="偶鴨蘇咪哪薩一 醬詩淳你滿意ㄇㄨㄟˇ？"))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="偶壓屎咪那賽 許 詩 淳 😁😁😁"))
         return 0
     elif event.message.text.find("**") >= 0:
         translator = Translator()
