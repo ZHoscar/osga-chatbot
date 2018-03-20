@@ -184,7 +184,7 @@ def handle_message(event):
 
     elif event.message.text.find("**") >= 0:
         translator = Translator()
-        trans = translator.translate(event.message.text[4:], dest='ja')
+        trans = translator.translate(event.message.text[2:], dest='ja')
 
 
         line_bot_api.reply_message(
