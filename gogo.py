@@ -191,6 +191,15 @@ def handle_message(event):
                                     event.reply_token, TextSendMessage(text=trans.text)
         )
         return 0
+    elif event.message.text.find("##") >= 0:
+        translator = Translator()
+        trans = translator.translate(event.message.text[2:], dest = 'tl')
+
+        line_bot_api.reply_message(
+                                event.reply_token, TextSendMessage(text=trans.text)
+                                   )
+        return 0
+
 
     elif event.message.text.find("我要買") >= 0:
         User_Product = Product_T()
